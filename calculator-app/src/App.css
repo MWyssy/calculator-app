@@ -1,6 +1,37 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem;
   text-align: center;
+  border: rgb(50, 52, 61) 5px solid;
+  border-radius: 35px;
+  box-shadow: 5px -5px 55px grey;
+  height: 75vh;
+  width: 52.5vh;
+  background-color: var(--calculator);
+}
+
+#top {
+  margin: -2vh 0 2vh 0;
+  height: 5vh;
+  text-align: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 5px;
+}
+
+#solar-bar {
+  border: rgb(50, 52, 61) 1px solid;
+  border-radius: 10px;
+  height: 4vh;
+  margin-top: 8px;
+  background-color: rgb(83, 91, 62);
+  box-shadow: inset -3px 3px 10px 2px rgb(59, 65, 45);
+}
+
+#name {
+  font-size: 2rem;
+  margin-top: 10px;
+  font-family: 'Monda', sans-serif;
+  color: rgb(36, 37, 43);
 }

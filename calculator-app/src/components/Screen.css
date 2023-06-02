@@ -1,0 +1,33 @@
+#screen {
+    border: rgb(50, 52, 61) 5px solid;
+    border-radius: 15px;
+    height: 20vh;
+    width: 100%;
+    margin-left: -5px;
+    box-shadow: inset -3px 3px 10px 2px rgb(95, 95, 76);
+    transform-style: preserve-3d;
+}
+
+#running-calc {
+    height: 66%;
+    width: 100%;
+    background-color: rgb(194, 194, 154);
+    box-sizing: border-box;
+    border-radius: 10px 10px 0 0;
+    padding: 0 15px 15px 15px;
+    transform: translateZ(-10px);
+}
+
+#current-input {
+    height: 34%;
+    width: 100%;
+    background-color: rgb(194, 194, 154);
+    box-sizing: border-box;
+    border-radius: 0 0 10px 10px;
+    padding: 15px;
+    transform: translateZ(-10px);
+}
+
+p {
+    display: inline;
+}
