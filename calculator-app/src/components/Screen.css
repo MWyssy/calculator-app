@@ -6,6 +6,8 @@
     margin-left: -5px;
     box-shadow: inset -3px 3px 10px 2px rgb(95, 95, 76);
     transform-style: preserve-3d;
+    font-family: 'Silkscreen', sans-serif;
+    text-align: right;
 }
 
 #running-calc {
@@ -16,6 +18,11 @@
     border-radius: 10px 10px 0 0;
     padding: 0 15px 15px 15px;
     transform: translateZ(-10px);
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    overflow: scroll;
+    line-height: 5px;
 }
 
 #current-input {
@@ -24,10 +31,16 @@
     background-color: rgb(194, 194, 154);
     box-sizing: border-box;
     border-radius: 0 0 10px 10px;
-    padding: 15px;
     transform: translateZ(-10px);
+    padding: 0 15px 15px 15px;
 }
 
-p {
+h2 {
     display: inline;
+    font-size: 2rem;
+}
+
+h3 {
+    display: inline;
+    margin: 15px 0 0 0;
 }
