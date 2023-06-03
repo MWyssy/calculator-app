@@ -22,7 +22,7 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto;
     overflow: scroll;
-    line-height: 5px;
+    line-height: 16px;
 }
 
 #current-input {
@@ -35,6 +35,10 @@
     padding: 0 15px 15px 15px;
     overflow-x: scroll;
     overflow-y: hidden;
+}
+
+#calc-list {
+    list-style: none;
 }
 
 h2 {

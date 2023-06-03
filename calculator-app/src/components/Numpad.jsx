@@ -17,16 +17,15 @@ function Numpad() {
                 operator: '',
                 reset: true
             })
-        } else {
+        } else if (input.number[input.number.length - 1] === ' ') {
             setInput({
-                number: input.number + event.target.outerText,
+                number: button,
                 operator: '',
                 reset: false
             })
-        }
-        if (input.number[input.number.length - 1] === ' ') {
+        } else {
             setInput({
-                number: '',
+                number: input.number + event.target.outerText,
                 operator: '',
                 reset: false
             })
@@ -55,32 +54,19 @@ function Numpad() {
                     reset: false
                 })
             }
-        } else if (button === '÷') {
+        } else if (button === '=') {
             setInput({
-                number: input.number + ' ÷ ',
-                operator: '÷',
+                number: '',
+                operator: '=',
                 reset: false
             })
-        } else if (button === 'x') {
+        } else {
             setInput({
-                number: input.number + ' x ',
-                operator: 'x',
+                number: `${input.number} ${button} `,
+                operator: button,
                 reset: false
             })
-        } else if (button === '-') {
-            setInput({
-                number: input.number + ' - ',
-                operator: '-',
-                reset: false
-            })
-        } else if (button === '+') {
-            setInput({
-                number: input.number + ' + ',
-                operator: '+',
-                reset: false
-            })
-        } 
-        
+        }
     }    
 
     return (

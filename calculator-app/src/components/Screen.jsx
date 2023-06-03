@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import './Screen.css'
 
 function Screen({input}) {
-    const [calculation, setCalculation] = useState({
-        number: '',
-        operator: '',
-        total: ''
-    })
+    const [calculation, setCalculation] = useState([])
 
     useEffect(() => {
         calculate()
@@ -14,40 +10,51 @@ function Screen({input}) {
     },[input])
 
     function calculate() {
-        const num = input.number
+        const num1 = input.number
         const oper = input.operator
 
-        if (oper === '÷') {
-            setCalculation({
-                number: num,
-                operator: oper,
-                total: Number(num.slice(0, -3))
-            })
-        } else if (oper === '+') {
-            setCalculation({
-                number: num,
-                operator: oper,
-                total: Number(num.slice(0, -3))
-            })
-        } else if (oper === '-') {
-            setCalculation({
-                number: num,
-                operator: oper,
-                total: Number(num.slice(0, -3))
-            })
-        } else if (oper === '+') {
-            setCalculation({
-                number: num,
-                operator: oper,
-                total: Number(num.slice(0, -3))
-            })
+        if (oper && (calculation.length && calculation[calculation.length - 1].oper === '') || !calculation.length && oper !== '=') {
+                setCalculation(
+                    [
+                        ...calculation,
+                        {
+                            num1: num1.slice(0, -3),
+                            oper: oper,
+                            num2: '',
+                            total: ''
+                        }
+                    ]
+                ) 
+        } else if (oper && calculation.length && calculation[calculation.length - 1].oper !== '') {
+            let current = calculation[calculation.length - 1]
+            if (oper !== '=') {
+                // setCalculation(
+                //     current = {
+                //         ...current,
+                //         num2: num1.slice(0, -3),
+                //         total: current.num1 + current.num2
+                //     }
+                // )
+            } else {
+                setCalculation([
+                    ...calculation,
+                    {
+                        num1: current.num1,
+                        oper: current.oper,
+                        num2: num1.slice(0, -3),
+                        total: ` = ${(Number(current.num1) + Number(num1.slice(0, -3))).toString()}`
+                    }
+                ])
+            }
         }
+
     }
 
     function reset() {
         if (input.reset) {
             setCalculation({
-                number: '',
+                num1: '',
+                num2: '',
                 operator: '',
                 total: ''
             })
@@ -57,7 +64,19 @@ function Screen({input}) {
     return (
         <section id="screen">
             <div id="running-calc">
-                <h3>{calculation.number}{calculation.total}</h3>              
+                <h3>
+                    {
+                        calculation.length ?
+                        <ul id="calc-list">
+                            {calculation.map((calc, index) => {
+                                return (
+                                    <li key={index}>{calc.num1} {calc.oper} {calc.num2} {calc.total}</li>
+                                )
+                            })} 
+                        </ul>
+                        : ''
+                    }
+                </h3>              
             </div>
             <div id="current-input"><h2>{input.number}</h2></div>
         </section>
