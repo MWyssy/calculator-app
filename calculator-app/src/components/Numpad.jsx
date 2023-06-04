@@ -8,38 +8,49 @@ function Numpad() {
         operator: '',
         reset: false
     })
+    const [clear, setClear] = useState('AC')
 
     const handleClick = event => {
         const button = event.target.outerText
-        if (button === 'C') {
+        if (button === 'AC') {
             setInput({
                 number: '',
                 operator: '',
                 reset: true
             })
-        } else if (input.number[input.number.length - 1] === ' ') {
+        } else if (button === 'C') {
             setInput({
-                number: button,
+                number: '',
                 operator: '',
                 reset: false
             })
+            setClear('AC')
         } else {
             setInput({
                 number: input.number + event.target.outerText,
                 operator: '',
                 reset: false
             })
+            setClear('C')
         }
     }
 
     const handleOperator = event => {
         const button = event.target.outerText
         if (button === '±') {
-            setInput({
-                number: '-' + input.number,
-                operator: '',
-                reset: false
-            })
+            if (!input.number.includes('-')) {
+                setInput({
+                    number: '-' + input.number,
+                    operator: '',
+                    reset: false
+                })
+            } else {
+                setInput({
+                    number: input.number.slice(1),
+                    operator: '',
+                    reset: false
+                })
+            }
         } else if (button === '%') {
             setInput({
                 number: Number(input.number) * 0.01.toString(),
@@ -48,32 +59,50 @@ function Numpad() {
             })
         } else if (button === '.') {
             if (!input.number.includes('.')) {
-                setInput({
-                    number: input.number + '.',
-                    operator: '',
-                    reset: false
-                })
+                if (input.number === '') {
+                    setInput({
+                        number: '0' + '.',
+                        operator: '',
+                        reset: false
+                    })
+                } else {
+                    setInput({
+                        number: input.number + '.',
+                        operator: '',
+                        reset: false
+                    })
+                }
             }
-        } else if (button === '=') {
+        } 
+        else if (button === '=') {
             setInput({
-                number: '',
+                number: input.number,
                 operator: '=',
                 reset: false
             })
-        } else {
-            setInput({
-                number: `${input.number} ${button} `,
-                operator: button,
-                reset: false
-            })
+        } 
+        else {
+            if (input.operator === '') {
+                setInput({
+                    number: `${input.number} ${button} `,
+                    operator: button,
+                    reset: false
+                })
+            } else {
+                setInput({
+                    number: input.number,
+                    operator: button,
+                    reset: false
+                })
+            }
         }
     }    
 
     return (
         <>
-            <Screen input={input}/>
+            <Screen input={input} setInput={setInput}/>
             <form id="numpad">
-                <button className="numpad-button symbol" id="cee" type='button' onClick={handleClick}>C</button>
+                <button className="numpad-button symbol" id="cee" type='button' onClick={handleClick}>{clear}</button>
                 <button className="numpad-button symbol" onClick={handleOperator} type='button'>±</button>
                 <button className="numpad-button symbol" onClick={handleOperator} type='button'>%</button>
                 <button className="numpad-button symbol" onClick={handleOperator} type='button'>÷</button>

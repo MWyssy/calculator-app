@@ -5,7 +5,7 @@
   text-align: center;
   border: rgb(50, 52, 61) 5px solid;
   border-radius: 35px;
-  box-shadow: 5px -5px 55px grey;
+  box-shadow: 10px 0px 0 -1px grey;
   height: 75vh;
   width: 52.5vh;
   background-color: var(--calculator);
@@ -17,21 +17,72 @@
   text-align: left;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  padding: 5px;
 }
 
 #solar-bar {
   border: rgb(50, 52, 61) 1px solid;
   border-radius: 10px;
   height: 4vh;
-  margin-top: 8px;
   background-color: rgb(83, 91, 62);
   box-shadow: inset -3px 3px 10px 2px rgb(59, 65, 45);
 }
 
 #name {
   font-size: 2rem;
-  margin-top: 2px;
   font-family: 'Monda', sans-serif;
   color: rgb(36, 37, 43);
+}
+
+@media (min-height: 0) {  
+  #root {
+    height: 83vh;
+    width: 58.1vh;
+    
+  }
+  #solar-bar {
+    margin-top: 0;
+  }
+  #name {
+    margin-top: 0;
+    font-size: 1.2rem;
+  }
+  #top {
+    padding: 2px;
+  }
+}
+@media (min-height: 640px) {
+  #root {
+    height: 87.5vh;
+    width: 61.25vh;
+    
+  }
+  #solar-bar {
+    margin-top: 8px;
+  }
+  #name {
+    margin-top: 0;
+    font-size: 2.5rem;
+  }
+  #top {
+    padding: 5px;
+  }
+  
+}
+@media (min-height: 1080px) {
+  #root {
+    height: 87.5vh;
+    width: 61.25vh;
+    
+  }
+  #solar-bar {
+    margin-top: 20px;
+  }
+  #name {
+    margin-top: 0;
+    font-size: 4rem;
+  }
+  #top {
+    padding: 5px;
+  }
+  
 }

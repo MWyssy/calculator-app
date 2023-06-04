@@ -21,7 +21,6 @@
 }
 
 .numpad-button:active {
-    margin: 5px;
     box-shadow: inset 1px 1px 3px rgb(100, 107, 127);
     background-color: rgb(213, 217, 230);
     border: rgb(50, 52, 61) 0.1px solid;
@@ -43,4 +42,25 @@
 #cee:active {
     box-shadow: inset 1px 1px 3px rgb(100, 107, 127);
     border: rgb(50, 52, 61) 0.1px solid;
+}
+
+@media (min-height: 0) {  
+    .numpad-button {
+        margin: 3px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (min-height: 650px) {  
+    .numpad-button {
+        margin: 5px;
+        font-size: 2rem;
+    }
+}
+
+@media (min-height: 1080px) {  
+    .numpad-button {
+        margin: 8px;
+        font-size: 3rem;
+    }
 }

@@ -16,7 +16,7 @@
     background-color: rgb(194, 194, 154);
     box-sizing: border-box;
     border-radius: 10px 10px 0 0;
-    padding: 0 15px 15px 15px;
+    padding-right: 15px;
     transform: translateZ(-10px);
     display: grid;
     grid-template-columns: 1fr;
@@ -46,7 +46,49 @@ h2 {
     font-size: 2rem;
 }
 
-h3 {
+ul {
     display: inline;
     margin: 15px 0 0 0;
+}
+
+@media (min-height: 0) {  
+    #screen {
+        height: 27.5vh;
+    }
+    ul {
+        font-size: 1rem;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+}
+
+@media (min-height: 650px) {  
+    #screen {
+        height: 27.5vh;
+    }
+    #running-calc {
+        line-height: 28px;
+    }
+    ul {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 4rem;
+    }
+}
+
+@media (min-height: 1080px) {  
+    #screen {
+        height: 27.5vh;
+    }
+    #running-calc {
+        line-height: 28px;
+    }
+    ul {
+        font-size: 2rem;
+    }
+    h2 {
+        font-size: 5rem;
+    }
 }
