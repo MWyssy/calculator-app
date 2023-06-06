@@ -4,8 +4,9 @@ import './Numpad.css'
 
 function Numpad() {
     const [input, setInput] = useState({
-        number: '',
-        operator: '',
+        number: '0',
+        equals: false,
+        continueCalc: false,
         reset: false
     })
     const [clear, setClear] = useState('AC')
@@ -14,24 +15,45 @@ function Numpad() {
         const button = event.target.outerText
         if (button === 'AC') {
             setInput({
-                number: '',
-                operator: '',
+                number: '0',
+                equals: false,
+                continueCalc: false,
                 reset: true
             })
         } else if (button === 'C') {
             setInput({
-                number: '',
-                operator: '',
+                number: '0',
+                equals: false,
+                continueCalc: false,
                 reset: false
             })
             setClear('AC')
         } else {
-            setInput({
-                number: input.number + event.target.outerText,
-                operator: '',
-                reset: false
-            })
-            setClear('C')
+            if (input.continueCalc) {
+                setInput({
+                    number: event.target.outerText,
+                    equals: false,
+                    continueCalc: false,
+                    reset: true
+                })
+            } else {
+                if (input.number === '0') {
+                    setInput({
+                        number: event.target.outerText,
+                        equals: false,
+                        continueCalc: false,
+                        reset: false
+                    })  
+                } else {
+                    setInput({
+                        number: input.number + event.target.outerText,
+                        equals: false,
+                        continueCalc: false,
+                        reset: false
+                    })
+                }
+                setClear('C')
+            }
         }
     }
 
@@ -41,20 +63,23 @@ function Numpad() {
             if (!input.number.includes('-')) {
                 setInput({
                     number: '-' + input.number,
-                    operator: '',
+                    equals: false,
+                    continueCalc: false,
                     reset: false
                 })
             } else {
                 setInput({
                     number: input.number.slice(1),
-                    operator: '',
+                    equals: false,
+                    continueCalc: false,
                     reset: false
                 })
             }
         } else if (button === '%') {
             setInput({
                 number: Number(input.number) * 0.01.toString(),
-                operator: '',
+                equals: false,
+                continueCalc: false,
                 reset: false
             })
         } else if (button === '.') {
@@ -62,13 +87,15 @@ function Numpad() {
                 if (input.number === '') {
                     setInput({
                         number: '0' + '.',
-                        operator: '',
+                        equals: false,
+                        continueCalc: false,
                         reset: false
                     })
                 } else {
                     setInput({
                         number: input.number + '.',
-                        operator: '',
+                        equals: false,
+                        continueCalc: false,
                         reset: false
                     })
                 }
@@ -77,50 +104,44 @@ function Numpad() {
         else if (button === '=') {
             setInput({
                 number: input.number,
-                operator: '=',
+                equals: true,
+                continueCalc: false,
                 reset: false
             })
-        } 
-        else {
-            if (input.operator === '') {
+        } else {
                 setInput({
                     number: `${input.number} ${button} `,
-                    operator: button,
+                    equals: false,
+                    continueCalc: false,
                     reset: false
                 })
-            } else {
-                setInput({
-                    number: input.number,
-                    operator: button,
-                    reset: false
-                })
-            }
-        }
+            } 
+
     }    
 
     return (
         <>
             <Screen input={input} setInput={setInput}/>
             <form id="numpad">
-                <button className="numpad-button symbol" id="cee" type='button' onClick={handleClick}>{clear}</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>±</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>%</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>÷</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>7</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>8</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>9</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>x</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>4</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>5</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>6</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>-</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>1</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>2</button>
-                <button className="numpad-button" onClick={handleClick} type='button'>3</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>+</button>
+                <button className="numpad-button symbol" id="clear" type='button' onClick={handleClick}>{clear}</button>
+                <button className="numpad-button symbol" id="negative" onClick={handleOperator} type='button'>±</button>
+                <button className="numpad-button symbol" id="percent" onClick={handleOperator} type='button'>%</button>
+                <button className="numpad-button symbol" id="divide" onClick={handleOperator} type='button'>÷</button>
+                <button className="numpad-button" id="seven" onClick={handleClick} type='button'>7</button>
+                <button className="numpad-button" id="eight" onClick={handleClick} type='button'>8</button>
+                <button className="numpad-button" id="nine" onClick={handleClick} type='button'>9</button>
+                <button className="numpad-button symbol" id="multiply" onClick={handleOperator} type='button'>x</button>
+                <button className="numpad-button" id="four" onClick={handleClick} type='button'>4</button>
+                <button className="numpad-button" id="five" onClick={handleClick} type='button'>5</button>
+                <button className="numpad-button" id="six" onClick={handleClick} type='button'>6</button>
+                <button className="numpad-button symbol" id="subtract" onClick={handleOperator} type='button'>-</button>
+                <button className="numpad-button" id="one" onClick={handleClick} type='button'>1</button>
+                <button className="numpad-button" id="two" onClick={handleClick} type='button'>2</button>
+                <button className="numpad-button" id="three" onClick={handleClick} type='button'>3</button>
+                <button className="numpad-button symbol" id="add" onClick={handleOperator} type='button'>+</button>
                 <button className="numpad-button" id="zero" onClick={handleClick} type='button'>0</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>.</button>
-                <button className="numpad-button symbol" onClick={handleOperator} type='button'>=</button>
+                <button className="numpad-button symbol" id="decimal" onClick={handleOperator} type='button'>.</button>
+                <button className="numpad-button symbol" id="equals" onClick={handleOperator} type='button'>=</button>
             </form>
         </>
         )

@@ -25,16 +25,18 @@
     line-height: 16px;
 }
 
-#current-input {
+#display {
     height: 34%;
     width: 100%;
     background-color: rgb(194, 194, 154);
     box-sizing: border-box;
     border-radius: 0 0 10px 10px;
     transform: translateZ(-10px);
-    padding: 0 15px 15px 15px;
-    overflow-x: scroll;
-    overflow-y: hidden;
+    padding: 0px 15px 15px 15px;
+    overflow: hidden;
+}
+
+#number {
 }
 
 #calc-list {
@@ -58,9 +60,6 @@ ul {
     ul {
         font-size: 1rem;
     }
-    h2 {
-        font-size: 2rem;
-    }
 }
 
 @media (min-height: 650px) {  
@@ -73,9 +72,6 @@ ul {
     ul {
         font-size: 2rem;
     }
-    h2 {
-        font-size: 4rem;
-    }
 }
 
 @media (min-height: 1080px) {  
@@ -87,8 +83,5 @@ ul {
     }
     ul {
         font-size: 2rem;
-    }
-    h2 {
-        font-size: 5rem;
     }
 }
