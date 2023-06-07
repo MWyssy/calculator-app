@@ -7,7 +7,7 @@
 }
 
 .numpad-button {
-    margin: 5px;
+    margin: 10px;
     box-shadow: 2px 2px 0px 1px rgb(33, 35, 41);
     background-color: rgb(213, 217, 230);
     border: rgb(213, 217, 230) 1px solid;
@@ -52,6 +52,13 @@
     }
 }
 
+@media (min-height: 650px) {  
+    .numpad-button {
+        margin: 5px;
+        font-size: 2rem;
+    }
+}
+
 @media (orientation: portrait) {  
     .numpad-button {
         margin: 5px;
@@ -65,7 +72,7 @@
 
 @media (min-height: 1080px) {  
     .numpad-button {
-        margin: 8px;
+        margin: 10px;
         font-size: 3rem;
     }
 }
