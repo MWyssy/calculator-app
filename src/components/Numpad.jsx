@@ -59,6 +59,8 @@ function Numpad() {
 
     const handleOperator = event => {
         const button = event.target.outerText
+        const testOperator = /[\-+x÷](?=\D*$)/g
+
         if (button === '±') {
             if (!input.number.includes('-')) {
                 setInput({
@@ -77,13 +79,13 @@ function Numpad() {
             }
         } else if (button === '%') {
             setInput({
-                number: input.number.replace(/\d+$/, (Number(input.number.match(/\d+$/).join('')) * 0.01).toString()),
+                number: input.number.replace(/[.\d]+$/, (Number(input.number.match(/[.\d]+$/).join('')) * 0.01).toString()),
                 equals: false,
                 continueCalc: false,
                 reset: false
             })
         } else if (button === '.') {
-            if (!input.number.includes('.')) {
+            if (input.number.match(/[-+]?\d*\.?\d+$/) && !input.number.match(/[-+]?\d*\.?\d+$/)[0].includes(".")) {
                 if (input.number === '') {
                     setInput({
                         number: '0' + '.',
@@ -108,8 +110,17 @@ function Numpad() {
                 continueCalc: false,
                 reset: false
             })
-        } else {
-            if (/[+\-x÷]/.test(input.number[input.number.length - 2])) {
+        }  
+        else if (testOperator.test(input.number) && input.number.match(testOperator).length === 2) {
+            setInput({
+                number: `${input.number.replaceAll(testOperator, '')} ${button} `,
+                equals: false,
+                continueCalc: false,
+                reset: false
+            })
+        } 
+        else {
+            if (button !== '-' && /[+\-x÷]/.test(input.number[input.number.length - 2])) {
                 setInput({
                     number: `${input.number.replace(/[+\-x÷][^+\-x÷]*$/, button)} `,
                     equa: false,

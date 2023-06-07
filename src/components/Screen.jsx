@@ -11,7 +11,17 @@ function Screen({input, setInput}) {
 
     function calculate() {
         const number = input.number
-        const current = calculation[calculation.length - 1]
+        const calc = calculation[calculation.length - 1];
+        const current = calculation.length > 0 
+            ? `${number}${calc.calc.replace(/-?\d*\.?\d+/, "")}`
+                .split('')
+                .map((char) => {
+                    return char === 'x' ? '*'
+                        : char === '÷' ? '/'
+                        : char
+                })
+                .join('')
+            : ''
         const calculate = number
             .split('')
             .map((char) => {
@@ -20,45 +30,40 @@ function Screen({input, setInput}) {
                     : char
             })
             .join('')
-            .split(/\s*(?=[+\-/*=])\s*/)
 
-        function maths(array) {
-            let num1 = Number(array[0]);
-            let result = 0;
+        function maths(str) {
+            return Function(`'use strict'; return (${str})`)()
+        }
 
-            const bodmas = array.sort((a, b) => {
-              const order = { "/": 1, "*": 2, "+": 3, "-": 4 };
-              const operatorA = a.trim().charAt(0);
-              const operatorB = b.trim().charAt(0);
-          
-              return order[operatorA] - order[operatorB];
-            });
-          
-            for (let i = 1; i < bodmas.length; i++) {
-              const mathsArray = bodmas[i].split(" ");
-              const operator = mathsArray[0];
-              const num2 = Number(mathsArray[1]);
-          
-              result =
-                operator === "+"
-                  ? num1 + num2
-                  : operator === "-"
-                  ? num1 - num2
-                  : operator === "/"
-                  ? num1 / num2
-                  : num1 * num2;
-              num1 = result;
-            }
-            return result;
-          }
-
-        if (input.equals) {
+        if (input.equals && !/[+\-x÷]/.test(input.number)) {
+            setCalculation(
+                [
+                    ...calculation,
+                    {
+                        calc: current
+                            .split('')
+                            .map((char) => {
+                                return char === '*' ? 'x'
+                                    : char === '/' ? '÷'
+                                    : char
+                            })
+                            .join(''),
+                        total: `= ${maths(current)}`
+                    }
+                ]
+            )
+            setInput({
+                number: maths(current).toString(),
+                equals: false,
+                continueCalc: true,
+                reset: false
+            })
+        } else if (input.equals) {
                 setCalculation(
                     [   
                         ...calculation,
                         {
                             calc: calculate
-                                    .join(' ')
                                     .split('')
                                     .map((char) => {
                                         return char === '*' ? 'x'
@@ -77,138 +82,6 @@ function Screen({input, setInput}) {
                     reset: false
                 })
         } 
-
-
-    //     else if (oper === '=') {         
-    //             if (current.oper === '+') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: current.oper,
-    //                         num2: number ? number : current.num2,
-    //                         total: ` = ${(Number(current.total.slice(3)) + Number(number ? number : current.num2)).toString()}`
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (current.oper === '-') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: current.oper,
-    //                         num2: number ? number : current.num2,
-    //                         total: ` = ${(Number(current.total.slice(3)) - Number(number ? number : current.num2)).toString()}`
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (current.oper === 'x') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: current.oper,
-    //                         num2: number ? number : current.num2,
-    //                         total: ` = ${(Number(current.total.slice(3)) * Number(number ? number : current.num2)).toString()}`
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (current.oper === '÷') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: current.oper,
-    //                         num2: number ? number : current.num2,
-    //                         total: ` = ${(Number(current.total.slice(3)) / Number(number ? number : current.num2)).toString()}`
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             }
-    //         }
-    //     } else {
-    //         if (current.total !== '') {
-    //             if (oper === '+') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: oper,
-    //                         num2: '',
-    //                         total: ''
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (oper === '-') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: oper,
-    //                         num2: '',
-    //                         total: ''
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (oper === 'x') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: oper,
-    //                         num2: '',
-    //                         total: ''
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (oper === '÷') {
-    //                 setCalculation([
-    //                     ...calculation,
-    //                     {   
-    //                         num1: current.total.slice(3),
-    //                         oper: oper,
-    //                         num2: '',
-    //                         total: ''
-    //                     }
-    //                 ])
-    //                 setInput({
-    //                     number: '',
-    //                     equals: false,
-    //                     reset: false
-    //                 })
-    //             } else if (/[0-9.]/.test(input.number)){
-    //                 setCalculation([])
-    //             }
-    //         } 
-    //     } 
     }
 
     function reset() {
