@@ -77,7 +77,7 @@ function Numpad() {
             }
         } else if (button === '%') {
             setInput({
-                number: Number(input.number) * 0.01.toString(),
+                number: input.number.replace(/\d+$/, (Number(input.number.match(/\d+$/).join('')) * 0.01).toString()),
                 equals: false,
                 continueCalc: false,
                 reset: false
@@ -109,12 +109,21 @@ function Numpad() {
                 reset: false
             })
         } else {
+            if (/[+\-x÷]/.test(input.number[input.number.length - 2])) {
+                setInput({
+                    number: `${input.number.replace(/[+\-x÷][^+\-x÷]*$/, button)} `,
+                    equa: false,
+                    continueCalc: false,
+                    reset: false
+                })
+            } else {
                 setInput({
                     number: `${input.number} ${button} `,
                     equals: false,
                     continueCalc: false,
                     reset: false
                 })
+            }
             } 
 
     }    
