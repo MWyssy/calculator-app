@@ -37,15 +37,12 @@
 }
 
 #number {
+    display: inline;
+    font-size: 2rem;
 }
 
 #calc-list {
     list-style: none;
-}
-
-h2 {
-    display: inline;
-    font-size: 2rem;
 }
 
 ul {
@@ -58,19 +55,22 @@ ul {
         height: 27.5vh;
     }
     ul {
-        font-size: 1rem;
+        font-size: 1.5rem;
+    }
+    #number {
+        font-size: 1.5rem;
     }
 }
 
-@media (min-height: 650px) {  
+@media (orientation: portrait) {  
     #screen {
-        height: 27.5vh;
+        height: 50vw;
     }
     #running-calc {
         line-height: 28px;
     }
     ul {
-        font-size: 2rem;
+        font-size: 1.5rem;
     }
 }
 

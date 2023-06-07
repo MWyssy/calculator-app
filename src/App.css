@@ -7,8 +7,8 @@
   border-radius: 35px;
   box-shadow: 10px 0px 0 -1px grey;
   height: 75vh;
-  width: 52.5vh;
   background-color: var(--calculator);
+  aspect-ratio: 1 / 1.5;
 }
 
 #top {
@@ -36,7 +36,6 @@
 @media (min-height: 0) {  
   #root {
     height: 83vh;
-    width: 58.1vh;
     
   }
   #solar-bar {
@@ -50,11 +49,9 @@
     padding: 2px;
   }
 }
-@media (min-height: 640px) {
+@media (orientation: portrait) {
   #root {
-    height: 87.5vh;
-    width: 61.25vh;
-    
+    height: 125vw;
   }
   #solar-bar {
     margin-top: 8px;
@@ -71,7 +68,6 @@
 @media (min-height: 1080px) {
   #root {
     height: 87.5vh;
-    width: 61.25vh;
     
   }
   #solar-bar {

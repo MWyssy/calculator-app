@@ -52,10 +52,14 @@
     }
 }
 
-@media (min-height: 650px) {  
+@media (orientation: portrait) {  
     .numpad-button {
         margin: 5px;
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+    #numpad {
+        grid-template-rows: repeat(5, 12vw);
+        margin-top: 5%;
     }
 }
 
